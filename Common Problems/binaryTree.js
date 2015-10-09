@@ -1,14 +1,3 @@
-// Look up at least two ways of maintaining a balanced binary search tree—that's how you get the O(log(n)) operation performance. Start with this Wikipedia article as a jumping off point, AVL trees and red-black trees are good choices to focus on.
-
-
-
-
-//BST
-
-//insertion *************
-//1. create a Node structure for the input(key)
-//2. check for special case - is that node the root?
-//3. helper function to position the Node that we can call recursively throught the hierarchy
 
 function BinarySearchTree(){
 
@@ -20,7 +9,7 @@ function BinarySearchTree(){
 
   var root = null;
 
-  //refactor add on to prototype.
+  //refactor add on to prototype.r
   this.insert = function(key){
     var newNode = new Node(key);
     if(root === null){
@@ -139,9 +128,63 @@ function BinarySearchTree(){
     return null;
   }
 
+  this.remove = function(key){
+    root = removeNode(root, key);
+  };
 
+  var removeNode = function(node, key){
 
+    //find node
+    //case 1 - node is null- not in tree
 
+    if(node === null){
+      return null
+    }
+
+    //searching
+    if(node > key){
+      if(node.right !== null){
+        node = node.right
+        removeNode(node)
+      }
+      //why do I need to return node here...
+      return node;
+
+    } else if (node < key) {
+      if(node.left !== null){
+        node = node.left
+        removeNode(node)
+      }
+      return node;
+
+    // found it - time to remove it
+    } else {
+
+        //case -1 no children
+        if(node.left === null && node.right === null){
+          node  = null;
+          return node;
+        };
+
+        //case -2 one children -check each side for a value-
+        if(node.right!== null){
+          node = node.right;
+          return node;
+
+        }else if(node.left !== null){
+          node = node.left;
+          return node;
+        }
+
+        //case -3 two children
+          //find min value in the right => replace node with that value
+          //=> set node to ther right to null ==> return null
+        var aux = getMinValue(node.right)
+        node.key = aux.key
+        //returns null; sets node.right to null
+        node.right = removeNode(node.right, aux.key)
+        return node
+    }
 };
 
 //HELPER FUNCTIONS
@@ -150,31 +193,26 @@ function printNode(value){
   console.log(value);
 }
 
-var tree = new BinarySearchTree();
 
-tree.insert(11);
-tree.insert(7);
-tree.insert(15);
-tree.insert(5);
-tree.insert(3);
-tree.insert(9);
-tree.insert(8);
-tree.insert(10);
-tree.insert(13);
-tree.insert(12);
-tree.insert(14);
-tree.insert(20);
-tree.insert(18);
-tree.insert(25);
-tree.insert(6);
 
-console.log(tree);
+//Notes
 
-tree.inOrderTraverse(printNode);
+//BST
 
-//MOAR NOTES***********************************************
+//insertion *************
+//1. create a Node structure for the input(key)
+//2. check for special case - is that node the root?
+//3. helper function to position the Node that we can call recursively throught the hierarchy
 
-// IN ORDER TRAVERSE__ : visits all the nodes of BST in ascending order- it visits all nodes from smallest to largest
+//search*************
+
+
+
+
+//delete**************
+
+
+//For depth-first search:
 // callback function usees the VISITOR PATTERN
 // the visitor pattern is what we want to happend when we visit each node.
 
