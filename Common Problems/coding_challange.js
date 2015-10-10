@@ -16,46 +16,38 @@ function reverseWordOrder(string){
 // console.log(reverseWordOrder(mySentence));  ..tsafkaerb rof laemtao emos dah I
 
 
+
 //1.Given a string, reverse the word order of the string.
 var mySentence = 'I love apples';
 
-// dont understand why the concatination doesnt work
+//split the string to iterate over it
+//iterate backwards
+//idenfiy whitespaces & words
+//when a word ends add it to the ouput
 
-// function reverseWords(mySentence){
-//   var reverseWords = ' ';
-//   var letters = 0;
-//   for(var i = mySentence.length-1; i >= 0; i--){
-//     if(mySentence[i]==' '||i==0){
-//       var word = mySentence.substr(i, letters +1);
-//       reverseWords+=word
-//       letters = 0
-//     }else{
-//       letters++;
-//     }
-//   }
+function reverseWordOrder(string){
+  var reversed = [];
+  var wordLen = 0;
+  var myString = string.split('')
 
-//   return reverseWords
-// };
+  for(var i = myString.length-1 ;  i >= 0; i--)
+    if(myString[i] ==' ' || i == 0 ){
+      reversed.push(string.substr(i, wordLen + 1));
+      wordLen = 0;
+    }else{
+      wordLen++;
+    }
 
-// console.log(reverseWords(mySentence));
+  return reversed.join(' ');
+};
 
-// function reverseWords(str){
-//  var rev = [],
-//      wordLen = 0;
-//  for(var i = str.length-1; i>=0; i--){
-//    if(str[i]==' ' || i==0){
-//      rev.push(str.substr(i,wordLen+1));
-//      wordLen = 0;
-//    }
-//    else
-//      wordLen++;
-//  }
-//  return rev.join(' ');
-// }
+
+// console.log(reverseWordOrder("I love apples"));
+
 
 //Given a string find the first non repeating char
 
-// 1. use charAt & indexOf
+// use charAt & indexOf
 // runtime ?  O(n2) ?- not sure why
 function firstNonRepeatedChar(string){
   for (var i = 0; i < string.length; i++) {
@@ -71,10 +63,10 @@ function firstNonRepeatedChar(string){
 // console.log(firstNonRepeatedChar(someString));
 
 
-14. random between 5 to 7
-Question:If you have a function that generate random number between 1 to 5 how could u generate random number 1 to 7 by using that function?
+// 14. random between 5 to 7
+// Question:If you have a function that generate random number between 1 to 5 how could u generate random number 1 to 7 by using that function?
 
-Answer: Very simple. think of some basic arithmetic and you will get it.
+// Answer: Very simple. think of some basic arithmetic and you will get it.
 
 
 //12. Remove all duplicate char
@@ -107,8 +99,8 @@ function isPalindrome(string){
   return false;
 }
 
-console.log(isPalindrome('madam'));
-console.log(isPalindrome('monkey'));
+// console.log(isPalindrome('madam'));
+// console.log(isPalindrome('monkey'));
 
 
 
@@ -128,7 +120,8 @@ function isPrime(n){
 }
 
 
-//GET ALL PRIME FACTORS
+//get all prime factors of a given number
+// prime factor is a number that can only be divided by itself or 1.
 function getPrimeFactors(n){
   var primeFactors = [];
   var divisor = 2
@@ -159,6 +152,168 @@ function recursiveString(string){
 function reverseWord(sentence){
   return sentence.split('').reverse().join('')
 }
+
+
+
+// How would you find the greatest common divisor of two numbers?
+// greatest common divisor = largest number both can be divided by with no remainder
+var num1 = 12;
+var num2 = 24;
+
+function greatestCommonDivisor(n1, n2){
+  var divisor = 2,
+      greatestDivisor = 1;
+
+  //if either number is less than 2 - only possible solution is 1
+  if(n1 < 2 || n2 < 2){
+    return 1
+  }
+
+  //while divisor is less than number
+  //find a number that both can be divided by with no dividend
+
+  while(n1 >= divisor && n2 >= divisor ){
+    if(n1 % divisor == 0 && n2 % divisor == 0){
+      greatestDivisor = divisor
+    }
+    divisor++
+  }
+  return greatestDivisor;
+};
+
+
+
+
+
+
+
+
+//fancy algorithm
+function greatestCommonDivisor(a, b){
+  if(b == 0){
+    return a;
+  }else{
+    return greatestCommonDivisor(b, a%b)
+  }
+}
+
+
+
+
+//remove duplicates from an array
+var myArray = ['s', 'a', 'a', 'c', 'c', 'd', 'e', 'd']
+
+function removeDups(arr){
+  var dups = {};
+
+  for(var i = arr.length-1; i >=0 ; i--){
+    var item = arr[i];
+    if(!dups[item]){
+      dups[item]=1
+    }else{
+      arr.splice(i,1)
+    }
+  }
+  return arr;
+};
+
+//console.log(removeDups(myArray));
+
+
+
+
+
+
+
+
+
+
+//Merge Two sorted arrays
+
+//combine in a new array
+//keep a pointer on each array
+//make descisions
+
+function mergeSortedArray(a,b){
+
+  var merged = [],
+      aElm = a[0],
+      bElm = b[0],
+      i = 1,
+      j = 1;
+  if(a.length == 0){
+    return b
+  }
+  if(b.length == 0){
+    return a
+  }
+  while( aElm || bElm ){
+    if( (aElm && !bElm) || aElm < bElm){
+      merged.push(aElm);
+      aElm = a[i++];
+    }else{
+      merged.push(bElm)
+      bElm = b[j++];
+    }
+  }
+  return merged;
+}
+
+//console.log(mergeSortedArray([2,5,6,9], [1,2,3,29]))
+
+
+
+//swap number without temp
+
+function swapNumb(a,b){
+  b = b-a;
+  console.log(b)
+  a = a+b;
+  console.log(a)
+  b = a-b;
+  console.log('after swap: ', 'a: ', a, 'b: ', b);
+};
+
+swapNumb(4,6)
+
+
+//make reverse function as string extension?
+
+//I need to add this function to the String.prototype and instead of using str as parameter, i need to use this
+
+String.prototype.reverse = function(){
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
