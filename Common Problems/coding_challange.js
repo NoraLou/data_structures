@@ -52,7 +52,7 @@ function reverseWordOrder(string){
 function firstNonRepeatedChar(string){
   for (var i = 0; i < string.length; i++) {
     var c = string.charAt(i);
-    if(string.indexOf(c) == 1 && string.indexOf(c, i + 1) == -1){
+    if(string.indexOf(c) == i && string.indexOf(c, i + 1) == -1){
       return c ;
     }
   }
@@ -267,14 +267,12 @@ function mergeSortedArray(a,b){
 
 function swapNumb(a,b){
   b = b-a;
-  console.log(b)
   a = a+b;
-  console.log(a)
   b = a-b;
   console.log('after swap: ', 'a: ', a, 'b: ', b);
 };
 
-swapNumb(4,6)
+// swapNumb(4,6)
 
 
 //make reverse function as string extension?
@@ -282,25 +280,75 @@ swapNumb(4,6)
 //I need to add this function to the String.prototype and instead of using str as parameter, i need to use this
 
 String.prototype.reverse = function(){
-
-
-
-
-
-
+  if(!this || this.length <2){
+    return this
+  }
+  return this.split('').reverse().join('');
 }
 
 
+//a quick built in method to reverse the order of words
+
+var myString = 'I like cupcakes'
+
+// function reverseWords(str){
+//   revArr = str.split(' ').reverse();
+//   return String(revArr).replace(/,/g, ' ');
+// }
+
+function reverseWords(str){
+  return str.split(' ').reverse().join(' ')
+}
+
+// console.log(reverseWords(myString));
 
 
+// If you have a string like "I am the good boy". How can you generate "I ma eht doog yob"? Please note that the words are in place but reverse.
+
+//Do it with built in methods:
+
+var myString = "Winter is coming"
+
+//Answer
+//1. You have to reverse the word order in the sentence
+//2. Then you need to split per character and reverse the character order.
+//(reversing character order gives you a mirror image..)
+
+function reverseInPlace(str){
+  return str.split(' ').reverse().join(' ').split('').reverse().join('');
+}
+
+//console.log(reverseInPlace(myString));
+
+//REMOVE DUPLICATE CHAR FROM A STRING
+
+//loop througthig string. make a dictionary. remove any words that appear more thann once.
+
+function removeDupChars(str){
+  var charCount = {};
+  var noCharDups ='';
+
+  for(var i = 0; i < str.length; i++){
+    var item = str[i];
+    if(!charCount[item]){
+      charCount[item]=1;
+    }else{
+      charCount[item]++;
+    }
+  }
+
+  for(key in charCount){
+    if(charCount.hasOwnProperty(key)){
+      if(charCount[key] == 1){
+        noCharDups += key;
+      }
+    }
+  }
+  return noCharDups;
+};
 
 
-
-
-
-
-
-
+//console.log(removeDupChars('Learn more javascript dude'));
 
 
 

@@ -1,4 +1,8 @@
 
+// add next larger, next smaller i.e successor/predeccessor
+
+
+
 function BinarySearchTree(){
 
   var Node = function(key){
