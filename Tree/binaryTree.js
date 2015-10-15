@@ -15,6 +15,7 @@ function BinarySearchTree(){
 
   //refactor add on to prototype.r
   this.insert = function(key){
+
     var newNode = new Node(key);
     if(root === null){
       root = newNode
@@ -151,7 +152,6 @@ function BinarySearchTree(){
         node = node.right
         removeNode(node)
       }
-      //why do I need to return node here...
       return node;
 
     } else if (node < key) {

@@ -182,12 +182,6 @@ function greatestCommonDivisor(n1, n2){
 };
 
 
-
-
-
-
-
-
 //fancy algorithm
 function greatestCommonDivisor(a, b){
   if(b == 0){
@@ -218,12 +212,6 @@ function removeDups(arr){
 };
 
 //console.log(removeDups(myArray));
-
-
-
-
-
-
 
 
 
