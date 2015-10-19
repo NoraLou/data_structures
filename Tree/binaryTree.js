@@ -1,8 +1,6 @@
 
 // add next larger, next smaller i.e successor/predeccessor
 
-
-
 function BinarySearchTree(){
 
   var Node = function(key){
@@ -125,7 +123,7 @@ function BinarySearchTree(){
 
   var getMaxValue = function(node){
     if(node){
-      while(node && node.right ! == null){
+      while(node && node.right !== null){
         node = node.right
       }
       return node.key
@@ -197,6 +195,21 @@ function printNode(value){
   console.log(value);
 }
 
+var myTree = new BinarySearchTree();
+
+function printNode(value){
+    console.log(value);
+}
+
+
+myTree.insert(12);
+myTree.insert(13);
+myTree.insert(8);
+myTree.insert(14);
+myTree.insert(5)
+
+console.log('********* pre-order transverse ***********');
+myTree.preOrderTraverse(printNode);
 
 
 //Notes

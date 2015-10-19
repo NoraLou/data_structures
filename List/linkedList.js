@@ -11,7 +11,9 @@ function LinkedList(){
 
 LinkedList.prototype = {
 
-    add : function(val){
+    constructor : LinkedList,
+
+    append : function(val){
 
       //create node
       var node = {
@@ -35,7 +37,7 @@ LinkedList.prototype = {
       this.length++
     },
 
-    delete : function (val){
+    remove : function (val){
 
       // set up pointers
       var current = this.head;
@@ -53,7 +55,8 @@ LinkedList.prototype = {
           if(current.key == val){
             //jump over previous
             previous.next = current.next
-            return null;
+            this.length--;
+            break;
 
           }else{
             previous = current;
@@ -64,38 +67,22 @@ LinkedList.prototype = {
 
       if(current.key == val){
         previous.next = null;
+        this.length--;
       }
     }//delete
 }//prototye
 
 
-var test = new LinkedList();
+// var test = new LinkedList();
+// test.add(5);
+// test.add(6);
+// test.add(8);
+// console.log(test)
+// test.delete(8)
+// test.delete(6)
+// test.delete(5)
+// console.log(test)
 
-test.add(5);
-test.add(6);
-test.add(8);
-
-
-console.log(test);
-console.log("*******************************************");
-// console.log(test.head);
-// console.log('*******************************************');
-// console.log(test.head.next);
-// console.log("********************************************");
-// console.log(test.head.next.next);
-
-// test.delete(5);
-// console.log(test);
-// console.log("*******************************************");
-test.delete(6);
-console.log(test);
-console.log("********************************************");
-test.delete(8);
-console.log(test);
-console.log("********************************************");
-test.delete(5);
-console.log("********************************************");
-console.log(test);
 
 
 
@@ -155,6 +142,121 @@ console.log(test);
 //   if(k <= 0){return }
 
 // }
+
+
+//Double Linked List
+
+function DoubleLinkedList(){
+  this.head = null
+  this.tail = null
+  this.length = 0
+
+}
+
+
+DoubleLinkedList.prototype = {
+
+  constructor : DoubleLinkedList,
+
+  append : function(val){
+
+    var node = {
+      key : val,
+      next : null,
+      prev : null
+    },
+      current,
+      previous
+
+    //no items yet
+    if(this.head === null){
+      this.head = node;
+      this.tail = node;
+    }else{
+      this.tail.next = node;
+      node.prev = this.tail;
+      this.tail = node;
+    }
+    this.length++;
+  },//append
+
+  remove: function(val){
+
+    var current = this.head,
+      previous
+
+    //case 1 - value is at head
+    if(current.key == val){
+      this.head = current.next;
+      if(this.head){
+        this.head.previous = null
+        return this
+      }
+    }
+
+
+    //case 2 node in the middle
+    previous = current
+
+    while(current.next){
+      if(current.key == val){
+        previous.next = current.next;
+        //WHY?????????????????????????????????
+        current.next.previous = previous
+        break;
+      }else{
+        previous = current
+        current = current.next
+      }
+    }
+
+    //case 3 -its the last node
+    if(current.key = val){
+      previous.next = null;
+    }
+
+
+  }//remove
+}
+
+var test = new DoubleLinkedList();
+// console.log(test)
+// console.log("****************************")
+test.append(6)
+test.append('cat')
+test.append('88')
+console.log(test)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

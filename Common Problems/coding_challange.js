@@ -338,6 +338,126 @@ function removeDupChars(str){
 
 //console.log(removeDupChars('Learn more javascript dude'));
 
+//Sum of two
+// Question: From a unsorted array, check whether there are any two numbers that will sum up to a given number?
+
+//you have to compare every number with every other number
+
+function sumFinder(arr, n){
+  for (var i = 0; i < arr.length ; i++){
+    for(var j = i+1; j < arr.length; j++){
+      if(arr[i] + arr[j] == n)
+        return true
+    }
+  }
+  return false;
+}
+
+// console.log(sumFinder([6,4,3,2,1,7], 9))
+// console.log(sumFinder([6,4,3,2,1,7], 2))
+
+
+//How can you make above question better
+
+//Make an object that keeps track of the values you have visited
+//As you iterate, calculate the "substract", that you would need to reach the sum number, for the present value you are one
+//do a dictionary check at O(1)
+//if the value is there return true.
+
+//creating a dictionary allows you to only iterate once
+//now at 0(n) where n is the length of the input.
+
+function fasterSumFinder(arr, sum){
+  var differ = {},
+      len = arr.length,
+      substract;
+
+  for(var i =0; i<len; i++){
+     substract = sum - arr[i];
+
+     if(differ[substract])
+       return true;
+     else
+       differ[arr[i]] = true;
+  }
+
+  return false;
+}
+
+//console.log(fasterSumFinder([6,4,3,2,1,7], 9));
+//true
+//console.log(fasterSumFinder([6,4,3,2,1,7], 2));
+//false
+
+
+
+//Given an array of elements find the largest sum of any two elements?
+
+var myArray = [1,2,9,4,5,6,7,8]
+
+//iterate through array.
+//find the largest element - store it.
+//iterate againg skip the largest - find the second largest.
+//return largest and second largest combined.
+
+
+// O(n) - time of function is linear to amount of input
+
+function largestSum(arr){
+
+  var largest = 0;
+  var secondLargest = 0;
+
+  for(var i = 0; i < arr.length; i++){
+    var num = arr[i];
+    if(num >largest){
+      largest = num
+    }
+  }
+
+  for(var i = 0; i < arr.length; i++){
+    var num2 = arr[i];
+    if(num2 > secondLargest  && num2 !== largest){
+      secondLargest = num2;
+    }
+  }
+
+  return largest + secondLargest
+
+}
+
+console.log(largestSum(myArray))
+
+//Another implementation - try to look into later
+
+// function topSum(arr){
+
+//   var biggest = arr[0],
+//       second = arr[1],
+//       len = arr.length,
+//       i = 2;
+
+//   if (len<2) return null;
+
+//   if (biggest<second){
+//     biggest = arr[1];
+//     second = arr[0];
+//   }
+
+//   for(; i<len; i++){
+
+//    if(arr[i] > biggest){
+//       second = biggest;
+//       biggest = arr[i];
+//     }
+//    else if (arr[i]>second){
+//       second = arr[i];
+//    }
+
+//  }
+//  return biggest + second;
+// }
+
 
 
 
