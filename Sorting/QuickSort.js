@@ -23,9 +23,42 @@ var partition = function(array, left, right){
     j = right;
 
     console.log('pivot is :' + pivot + 'left is :' + left ; )
-}
 
+    while(i <= j){
+      while(array[i] < pivot){
+        i++;
+        console.log('i= ' + j);
+      }
 
+      while(aray[j] > pivot){
+        j--;
+        console.log('j=' + j);
+      }
+
+      if(i<=j){
+        console.log('swap' +  array[i] + 'with' + array[j]);
+        swapQuickSort(array, i, j);
+        i++;
+        j--;
+      }
+    }
+    return i;
+};
+
+var swapQuickSort = function(array, index1, index2){
+  var aux = array[index1];
+  array[index1] = array[index2];
+  array[index2] = aux;
+};
+
+var quick = function(array, left, right){
+  var index;
+
+  if(array.length > 1){
+    index = partition(array, left, right);
+  }
+
+};
 
 
 

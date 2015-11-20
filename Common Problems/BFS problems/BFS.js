@@ -108,6 +108,35 @@ function printTree(tree){
 // run it
 console.log(printTree(T));
 
+//Another way to do it.
+
+// Use a queue to store nodes at each level. Use null to mark the end of one level.
+
+// Initially, push the root node and null to the queue. Then iterate the queue, push children of each node to the queue and mark non-null element. When you encounter a null element, push a new one. So two consequent null marks the end of iteration.
+
+// var process = function (node) {
+//     var queue = [node, null];
+//     var i = 0, n = 1;
+//     while (queue[i] != null || (i == 0 || queue[i-1] != null)) {
+//         if (queue[i] == null) {
+//             queue.push(null);
+//         }
+//         else {
+//             queue[i].n = n++;
+//             queue[i].children.forEach(function (elem) {
+//                 queue.push(elem);
+//             });
+//         }
+//         i++;
+//     }
+// }
+
+// process(data);
+// console.log(data);
+// I used an Array for the queue and didn't dequeue the visited elements (O(n) space required). If the space consumed by queue is a bottleneck, you can replace it with some other queue implementation and alter the algorithm a bit.
+
+
+
 
 
 

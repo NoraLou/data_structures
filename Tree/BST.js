@@ -33,8 +33,8 @@ BinaryTree.prototype.insert = function(key){
     }
   }
 
-  if(this.root == null){
-    this.root = newNode
+  if(root == null){
+    root = newNode
   }else{
     //call helper function from the root!
     insertNode(root, newNode)
@@ -111,8 +111,3 @@ function printNode(value){
 
 btTest = new BinaryTree();
 btTest.insert(20)
-console.log(btTest)
-
-printNode(btTest)
-
-

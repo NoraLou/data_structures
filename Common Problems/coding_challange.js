@@ -59,8 +59,8 @@ function firstNonRepeatedChar(string){
   return null;
 };
 
-// var someString = 'the quick brown fox ate quickly';
-// console.log(firstNonRepeatedChar(someString));
+var someString = 'the quick brown fox ate quickly';
+console.log(firstNonRepeatedChar(someString));
 
 
 // 14. random between 5 to 7
@@ -86,6 +86,20 @@ function removeDupChar(string){
 }
 
 //console.log(removeDupChar('aabbcc'));
+
+
+//12.5 Does array A have duplicate entries?
+
+// var aArr = [1,2,3,4,4,5,5,6,7];
+
+// for(var i = 0; i < aArr.length; i++ ){
+//   for(var j = i+ 1 ; j < aArr.length; j++){
+//     if(aArr[i] == aArr[j]){
+//       return true
+//     }
+//   }
+//  return false
+// }
 
 
 //13. check palindrome
@@ -334,13 +348,10 @@ function removeDupChars(str){
   }
   return noCharDups;
 };
-
-
 //console.log(removeDupChars('Learn more javascript dude'));
 
 //Sum of two
 // Question: From a unsorted array, check whether there are any two numbers that will sum up to a given number?
-
 //you have to compare every number with every other number
 
 function sumFinder(arr, n){
@@ -357,8 +368,7 @@ function sumFinder(arr, n){
 // console.log(sumFinder([6,4,3,2,1,7], 2))
 
 
-//How can you make above question better
-
+//How can you make above question better?
 //Make an object that keeps track of the values you have visited
 //As you iterate, calculate the "substract", that you would need to reach the sum number, for the present value you are one
 //do a dictionary check at O(1)
@@ -367,27 +377,27 @@ function sumFinder(arr, n){
 //creating a dictionary allows you to only iterate once
 //now at 0(n) where n is the length of the input.
 
-function fasterSumFinder(arr, sum){
-  var differ = {},
-      len = arr.length,
-      substract;
-
-  for(var i =0; i<len; i++){
-     substract = sum - arr[i];
-
-     if(differ[substract])
-       return true;
-     else
-       differ[arr[i]] = true;
+function fasterSumFinder(arr, n){
+  var visited = {};
+  var diff ;
+  for(var i = 0; i < arr.length; i++){
+    var testValue = arr[i]
+    if(!visited[testValue]){
+      visited[testValue] = testValue
+    }
+    var diff = n - testValue
+    if(diff!== testValue  && visited[diff]){
+      return [diff, testValue]
+    }
   }
-
-  return false;
+  return null;
 }
 
-//console.log(fasterSumFinder([6,4,3,2,1,7], 9));
-//true
-//console.log(fasterSumFinder([6,4,3,2,1,7], 2));
-//false
+// console.log(sumFinder([6,4,3,2,1,7], 9))
+// console.log(sumFinder([6,4,3,2,1,7], 2))
+
+
+
 
 
 
@@ -400,63 +410,51 @@ var myArray = [1,2,9,4,5,6,7,8]
 //iterate againg skip the largest - find the second largest.
 //return largest and second largest combined.
 
-
 // O(n) - time of function is linear to amount of input
 
 function largestSum(arr){
-
   var largest = 0;
   var secondLargest = 0;
-
   for(var i = 0; i < arr.length; i++){
     var num = arr[i];
     if(num >largest){
       largest = num
     }
   }
-
   for(var i = 0; i < arr.length; i++){
     var num2 = arr[i];
     if(num2 > secondLargest  && num2 !== largest){
       secondLargest = num2;
     }
   }
-
   return largest + secondLargest
+}
+// console.log(largestSum(myArray))
 
+
+
+
+//Q:
+//Only one number is missing in the array.
+// The array is unsorted.
+// Find the missing number.
+//You have an array of numbers 1 to 100 in an array.
+
+//A:
+//sum of a linear series of n numbers = n*(n+1)/2
+
+function missingNumber(arr){
+  var n = arr.length + 1 ,
+  sum = 0,
+  expectedSum = n*(n+1)/2;
+
+  for(var i = 0 ; i < arr.length; i++){
+    sum += arr[i];
+  }
+  return expectedSum - sum;
 }
 
-console.log(largestSum(myArray))
-
-//Another implementation - try to look into later
-
-// function topSum(arr){
-
-//   var biggest = arr[0],
-//       second = arr[1],
-//       len = arr.length,
-//       i = 2;
-
-//   if (len<2) return null;
-
-//   if (biggest<second){
-//     biggest = arr[1];
-//     second = arr[0];
-//   }
-
-//   for(; i<len; i++){
-
-//    if(arr[i] > biggest){
-//       second = biggest;
-//       biggest = arr[i];
-//     }
-//    else if (arr[i]>second){
-//       second = arr[i];
-//    }
-
-//  }
-//  return biggest + second;
-// }
+// console.log(missingNumber([5,2,6,1,3]))
 
 
 
@@ -464,11 +462,38 @@ console.log(largestSum(myArray))
 
 
 
+//Q.
+//Count the total number of zeros from 1 up to N?
+
+//A.
+ // if you have a number 1 to 50 the value is 5. just 50 divided by 10. However, if the value is 100. the value is 11. you will get by 100/10 = 10 and 10/10. Thats how you will get in the more zeros in one number like (100, 200, 1000)
+
+function countZero(n){
+  var count = 0;
+  while(n>0){
+    count += Math.floor(n/10);
+    n = n/10;
+  }
+  return count;
+}
+// console.log(countZero(2014))
 
 
 
 
 
+//Q. Within a string how can you check for a certain substring?
+
+//A. 1 just use indeOf method
+
+function subStringFinder(str, subStr){
+    return str.indexOf(subStr)
+}
+
+console.log(subStringFinder('abbcdabbbbbck', 'bck'))
+
+
+//Q. How would you find all permutations of a string?
 
 
 
